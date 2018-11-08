@@ -22,9 +22,13 @@ const App = () => {
     () => {
       hubConnection.on("ChangeSlide", value => {
         if (value === "right") {
-          setSlideIndex(prevIndex => prevIndex + 1);
+          setSlideIndex(
+            prevIndex => (prevIndex + 1) % Object.values(videos).length
+          );
         } else if (value === "left") {
-          setSlideIndex(prevIndex => prevIndex - 1);
+          setSlideIndex(
+            prevIndex => (prevIndex - 1) % Object.values(videos).length
+          );
         }
       });
 
@@ -39,7 +43,7 @@ const App = () => {
 
   return (
     <Router>
-      <ImagesPage path="/" slideIndex={slideIndex} />
+      <ImagesPage path="/" slideIndex={slideIndex} hub={hubConnection} />
       <VideosPage path="videos" video={Object.values(videos)[slideIndex]} />
     </Router>
   );

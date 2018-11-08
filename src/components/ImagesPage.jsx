@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 // Static data
 import images from "../images/images";
 
-const ImagesPage = ({ slideIndex }) => {
+const ImagesPage = ({ slideIndex, hub }) => {
   const imageDivs = Object.values(images).map((img, index) => {
     return (
       <div key={index}>
@@ -11,6 +11,17 @@ const ImagesPage = ({ slideIndex }) => {
       </div>
     );
   });
+
+  useEffect(
+    () => {
+      setInterval(changeSlide, 10 * 1000);
+    },
+    [hub]
+  );
+
+  const changeSlide = () => {
+    hub.invoke("ChangeSlide", "right");
+  };
 
   return (
     <div>

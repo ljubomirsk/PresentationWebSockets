@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideosPage = ({ video }) => {
+const VideosPage = ({ video, changeSlide }) => {
   return (
     <video
       style={{ width: "100%" }}
